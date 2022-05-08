@@ -1,0 +1,21 @@
+{
+	"name": "parallel-end2end-suite",
+	"version": "1.0.0",
+	"description": "Interface Tests for etsy.com",
+	"scripts": {
+		"cy:open": "./node_modules/.bin/cypress open",
+		"cy:test": "./node_modules/.bin/cypress run --reporter mochawesome",
+		"cy:report": "bash ./bin/mochawesome-report.sh"
+	},
+	"author": "Nazmul.Islam",
+	"license": "ISC",
+	"devDependencies": {
+		"@shelex/cypress-allure-plugin": "2.23.0",
+		"cy-mobile-commands": "^0.3.0",
+		"cypress": "9.6.0",
+		"cypress-grep": "^2.12.2",
+		"mocha": "^9.1.3",
+		"mochawesome": "^7.0.1",
+		"mochawesome-merge": "^4.2.1"
+	}
+}

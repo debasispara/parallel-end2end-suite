@@ -1,0 +1,50 @@
+name: manual-end2end-suite
+on:
+  #Trigger manually with parameters
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Test environment - live, staging, qa, dev
+        default: 'live'
+        required: true
+      spec:
+        description: SPEC - Relative path or regex of the spec file(s). Eg., cypress/regression/pages/etsy_homepage_spec.js OR cypress/regression/pages/**/*
+        default: 'cypress/regression/**/*'
+        required: true
+      browser:
+        description: Browser - chrome or firefox
+        default: 'chrome'
+        required: true
+      tags:
+        description: TAGS - Comma separated tags to execute. use - (dash) before tag name to ignore tags. For example,"@desktop,-@mobile" (without quotes)
+        required: false
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set configuration env vars
+        id: vars
+        env:
+          DEFAULT_CY_BROWSER: chrome
+          DEFAULT_CY_SPEC: cypress/regression/**/*
+          DEFAULT_CY_TEST_ENV: live
+          DEFAULT_CY_TAGS: ""
+        run: |
+          echo "CY_BROWSER=${{ github.event.inputs.browser || env.DEFAULT_CY_BROWSER }}" >> $GITHUB_ENV
+          echo "CY_SPEC=${{ github.event.inputs.spec || env.DEFAULT_CY_SPEC }}" >> $GITHUB_ENV
+          echo "CY_TEST_ENV=${{ github.event.inputs.environment || env.DEFAULT_CY_TEST_ENV }}" >> $GITHUB_ENV
+          echo "CY_TAGS=${{ github.event.inputs.tags || env.DEFAULT_CY_TAGS }}" >> $GITHUB_ENV
+          echo ::set-output name=branch::${GITHUB_REF#refs/*/}
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          browser: "${{ env.CY_BROWSER }}"
+          headless: true
+          spec: "${{ env.CY_SPEC }}"
+          env: "test_env=${{ env.CY_TEST_ENV }},grepTags=${{ env.CY_TAGS }}"

@@ -1,0 +1,28 @@
+name: ci-end2end-suite
+on:
+  #Trigger when push to master
+  push:
+    branches:
+      - main
+
+  #Trigger when a pull request is opened
+  pull_request:
+    types:
+      - opened
+
+  #Trigger on a schedule
+#   schedule:
+#     - cron:  '0 12 * * *'
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.14.2-slim-chrome100-ff99-edge
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          browser: chrome

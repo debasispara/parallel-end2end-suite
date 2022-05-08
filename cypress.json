@@ -1,0 +1,40 @@
+{
+  "projectId": "test_project",
+  "chromeWebSecurity": false,
+  "pageLoadTimeout": 30000,
+  "defaultCommandTimeout": 10000,
+  "requestTimeout": 15000,
+  "responseTimeout": 30000,
+  "viewportWidth": 1440,
+  "viewportHeight": 900,
+  "video": true,
+  "videosFolder": "results/videos",
+  "screenshot": true,
+  "screenshotsFolder": "results/screenshots",
+  "ignoreTestFiles": "*.md",
+  "numTestsKeptInMemory": 10,
+  "integrationFolder":"cypress/regression",
+  "testFiles": "**/*_spec.js",
+  "trashAssetsBeforeRuns": true,
+  "retries": {
+    "runMode": 0,
+    "openMode": 0
+  },
+  "env":{
+    "allure":true,
+    "allureResultsPath": "results/allure-[hash]"
+  },
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "results/mochawesome-report",
+    "overwrite": false,
+    "html": false,
+    "json": true
+  },
+  "blockHosts": [
+    "*pinterest.com",
+    "*google.com",
+    "*cloudfunctions.net",
+    "*doubleclick.net"
+  ]
+}
