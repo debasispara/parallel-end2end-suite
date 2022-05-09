@@ -22,7 +22,7 @@ UI test suite for Parallel Finance applications
 
 Do the following on your terminal -
 
-**1. Clone web-ui-suite git repo in your git directory**
+**1. Clone parallel-end2end-suite git repo in your git directory**
 
     git clone https://github.com/gonazmul/parallel-end2end-suite.git
 
@@ -58,7 +58,7 @@ _Open with specific test environment (live, staging, qa or dev):_
 
 #### 3. Run tagged tests
 
-    `npm run cy:test -- --env grepTags=@mobile`
+    npm run cy:test -- --env grepTags=@mobile
 
 ### Run using docker image
 
