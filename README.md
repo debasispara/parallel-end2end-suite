@@ -27,7 +27,7 @@ Do the following on your terminal -
     git clone https://github.com/gonazmul/parallel-end2end-suite.git
 
 
-**2. Go to web-ui-suite directory**
+**2. Navigate to parallel-end2end-suite directory**
 
     cd parallel-end2end-suite
 
